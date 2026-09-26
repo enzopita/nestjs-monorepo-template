@@ -1,9 +1,8 @@
-import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule, ObserveInstrument } from "./app.module.js";
-import { configureApp } from "./app.setup.js";
-import type { Env } from "./config/env.schema.js";
+import { EnvService } from "./config/env.service.js";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -12,11 +11,15 @@ async function bootstrap() {
     ObserveInstrument ? { instrument: ObserveInstrument } : {},
   );
 
-  configureApp(app);
+  const env = app.get(EnvService);
 
-  const config = app.get<ConfigService<Env, true>>(ConfigService);
+  if (env.get("SWAGGER_ENABLED")) {
+    const document = new DocumentBuilder().setTitle("API").setVersion("0.0.1").build();
 
-  await app.listen(config.get("PORT", { infer: true }), config.get("HOST", { infer: true }));
+    SwaggerModule.setup("docs", app, () => SwaggerModule.createDocument(app, document));
+  }
+
+  await app.listen(env.get("PORT"), env.get("HOST"));
 }
 
 await bootstrap();

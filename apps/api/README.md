@@ -121,9 +121,12 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 Environment variables are validated at boot by `src/config/env.schema.ts` (Zod); the app refuses to start on invalid values. See `.env.example`.
 
-| Variable          | Default       | Notes                                                     |
-| ----------------- | ------------- | --------------------------------------------------------- |
-| `NODE_ENV`        | `development` | `development`, `test`, or `production`                    |
-| `HOST`            | `0.0.0.0`     | Fastify listen address                                    |
-| `PORT`            | `3000`        | Integer 1–65535                                           |
-| `SWAGGER_ENABLED` | `true`        | Serves Swagger UI at `/docs` and the spec at `/docs-json` |
+| Variable             | Default       | Notes                                                     |
+| -------------------- | ------------- | --------------------------------------------------------- |
+| `NODE_ENV`           | `development` | `development`, `test`, or `production`                    |
+| `HOST`               | `0.0.0.0`     | Fastify listen address                                    |
+| `PORT`               | `3000`        | Integer 1–65535                                           |
+| `SWAGGER_ENABLED`    | `true`        | Serves Swagger UI at `/docs` and the spec at `/docs-json` |
+| `OBSERVE_APP_KEY`    | `""`          | Empty disables reporting (module stays loaded)            |
+| `OBSERVE_APP_SECRET` | `""`          | Empty disables reporting                                  |
+| `OBSERVE_SERVICE_ID` | `api`         | Service name reported to Observe                          |

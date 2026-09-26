@@ -17,7 +17,7 @@ describe("Validation (e2e)", () => {
   let app: NestFastifyApplication;
 
   beforeEach(async () => {
-    app = await createApp({ controllers: [EchoController] });
+    app = await createApp([EchoController]);
   });
 
   afterEach(async () => {

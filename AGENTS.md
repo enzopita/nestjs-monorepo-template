@@ -33,6 +33,10 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 - Type-aware oxlint rules enforce this; fix the types, do not disable the rule.
 - `apps/api` builds with TypeScript 6 (`typescript` alias, required by the Nest CLI) and type-checks with TypeScript 7 (`typescript7`). Revisit when Nest supports TS 7.
 
+## Configuration
+
+- Declare every environment variable in `apps/api/src/config/env.schema.ts`; read it through the global `EnvService` (`env.get("KEY")`). Do not inject `ConfigService` or read `process.env` directly.
+
 ## Validation
 
 - Use Standard Schema with Zod via the built-in `StandardSchemaValidationPipe` and `@Body({ schema })`. Do not use class-validator or nestjs-zod.
