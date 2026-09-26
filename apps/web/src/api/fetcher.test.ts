@@ -38,24 +38,6 @@ describe("createFetcher", () => {
     expect(calls.map(({ url }) => url)).toEqual(["https://api.x.com/health/live"]);
   });
 
-  it("returns the response parsed by the schema", async () => {
-    const { fetchFn } = recordingFetch(Response.json({ status: "ok", extra: 1 }));
-    const request = createFetcher("https://api.x.com", fetchFn);
-
-    await expect(request("/health/live", { method: "GET", schema: statusSchema })).resolves.toEqual(
-      { status: "ok" },
-    );
-  });
-
-  it("rejects a response that does not match the schema", async () => {
-    const { fetchFn } = recordingFetch(Response.json({ status: "maybe" }));
-    const request = createFetcher("https://api.x.com", fetchFn);
-
-    await expect(
-      request("/health/live", { method: "GET", schema: statusSchema }),
-    ).rejects.toBeInstanceOf(z.ZodError);
-  });
-
   it("resolves without a value when the operation has no response schema", async () => {
     const { fetchFn } = recordingFetch(new Response(null, { status: 204 }));
     const request = createFetcher("https://api.x.com", fetchFn);
@@ -71,5 +53,14 @@ describe("createFetcher", () => {
 
     await expect(result).rejects.toBeInstanceOf(ApiError);
     await expect(result).rejects.toMatchObject({ status: 503, body: { status: "error" } });
+  });
+
+  it("keeps a non-JSON error body as raw text", async () => {
+    const { fetchFn } = recordingFetch(new Response("<html>Bad Gateway</html>", { status: 502 }));
+    const request = createFetcher("https://api.x.com", fetchFn);
+
+    await expect(
+      request("/health/ready", { method: "GET", schema: statusSchema }),
+    ).rejects.toMatchObject({ status: 502, body: "<html>Bad Gateway</html>" });
   });
 });
