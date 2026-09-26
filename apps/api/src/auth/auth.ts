@@ -8,7 +8,11 @@ type AuthOptions = {
   db: Database;
   env: Pick<
     Env,
-    "NODE_ENV" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "BETTER_AUTH_TRUSTED_ORIGINS"
+    | "NODE_ENV"
+    | "BETTER_AUTH_SECRET"
+    | "BETTER_AUTH_URL"
+    | "BETTER_AUTH_TRUSTED_ORIGINS"
+    | "BETTER_AUTH_COOKIE_PREFIX"
   >;
 };
 
@@ -26,6 +30,7 @@ export function createAuth({ db, env }: AuthOptions) {
     advanced: {
       // Better Auth skips the origin check under NODE_ENV=test; keep it on.
       disableOriginCheck: false,
+      cookiePrefix: env.BETTER_AUTH_COOKIE_PREFIX,
       // Force Secure cookies even when TLS terminates at a proxy.
       useSecureCookies: isProduction,
     },

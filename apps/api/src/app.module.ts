@@ -41,6 +41,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
             BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET"),
             BETTER_AUTH_URL: env.get("BETTER_AUTH_URL"),
             BETTER_AUTH_TRUSTED_ORIGINS: env.get("BETTER_AUTH_TRUSTED_ORIGINS"),
+            BETTER_AUTH_COOKIE_PREFIX: env.get("BETTER_AUTH_COOKIE_PREFIX"),
           },
         }),
       }),

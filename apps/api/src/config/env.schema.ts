@@ -18,6 +18,11 @@ export const envSchema = z.object({
         .filter(Boolean),
     )
     .pipe(z.array(z.url())),
+  // Cookies ignore ports, so apps sharing localhost need distinct prefixes.
+  BETTER_AUTH_COOKIE_PREFIX: z
+    .string()
+    .regex(/^[\w-]+$/)
+    .default("better-auth"),
   SWAGGER_ENABLED: z.stringbool().default(true),
   OBSERVE_APP_KEY: z.string().default(""),
   OBSERVE_APP_SECRET: z.string().default(""),

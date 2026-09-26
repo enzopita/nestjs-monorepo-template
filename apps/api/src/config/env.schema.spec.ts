@@ -24,3 +24,11 @@ describe("BETTER_AUTH_TRUSTED_ORIGINS", () => {
     expect(origins.safeParse("http://localhost:5173,nope").success).toBe(false);
   });
 });
+
+describe("BETTER_AUTH_COOKIE_PREFIX", () => {
+  const prefix = envSchema.shape.BETTER_AUTH_COOKIE_PREFIX;
+
+  it("rejects characters that are not valid in a cookie name", () => {
+    expect(prefix.safeParse("my app;").success).toBe(false);
+  });
+});
