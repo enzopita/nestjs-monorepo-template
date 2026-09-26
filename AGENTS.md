@@ -24,6 +24,14 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 - Follow `.claude/skills/nestjs-architecture-principles`: start with a flat feature module (controller, service, DTOs); add layers, ports, or repositories only when real pressure justifies it.
 - References to NestJS skills that are not installed can be ignored. AGENTS.md wins over any skill.
 
+## Type safety
+
+- Strict TypeScript everywhere (`@repo/typescript-config/base.json`); never loosen compiler flags per app.
+- No `any`, `as unknown as`, non-null `!`, or `@ts-ignore`. Narrow with type guards or parse with a schema at the boundary instead of asserting.
+- An unavoidable `as` needs a `// SAFETY:` comment stating the checked invariant.
+- Type-aware oxlint rules enforce this; fix the types, do not disable the rule.
+- `apps/api` builds with TypeScript 6 (`typescript` alias, required by the Nest CLI) and type-checks with TypeScript 7 (`typescript7`). Revisit when Nest supports TS 7.
+
 ## Validation
 
 - Use Standard Schema with Zod via the built-in `StandardSchemaValidationPipe` and `@Body({ schema })`. Do not use class-validator or nestjs-zod.
