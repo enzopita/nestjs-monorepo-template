@@ -7,10 +7,16 @@ describe("safeRedirect", () => {
     expect(safeRedirect("/settings?tab=profile")).toBe("/settings?tab=profile");
   });
 
-  it.each([undefined, "", "https://evil.com", "//evil.com", "/\\evil.com", "javascript:alert(1)"])(
-    "falls back to / for %s",
-    (value) => {
-      expect(safeRedirect(value)).toBe("/");
-    },
-  );
+  it.each([
+    undefined,
+    "",
+    "https://evil.com",
+    "//evil.com",
+    "/\\evil.com",
+    "/\t/evil.com",
+    " //evil.com",
+    "javascript:alert(1)",
+  ])("falls back to / for %s", (value) => {
+    expect(safeRedirect(value)).toBe("/");
+  });
 });

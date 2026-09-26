@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate, Outlet, useLocation } from "@tanstack/react-router";
 import { CircleUserIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,14 @@ export const Route = createFileRoute("/_app")({
 });
 
 function AppLayout() {
+  const session = useSession();
+  const location = useLocation();
+
+  // The guard only runs on navigation; a refetch can find the session expired or revoked meanwhile.
+  if (session === null) {
+    return <Navigate to="/sign-in" search={{ redirect: location.href }} replace />;
+  }
+
   return (
     <div className="flex min-h-svh flex-col">
       <header className="border-b">

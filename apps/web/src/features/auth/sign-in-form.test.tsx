@@ -38,4 +38,14 @@ describe("SignInForm", () => {
     expect(auth.calls).toEqual(["signIn:ada@example.com"]);
     expect(queryClient.getQueryData(sessionQueryKey)).toEqual(auth.session);
   });
+
+  it("shows a form error when the request fails", async () => {
+    const auth = new FakeAuthClient();
+    vi.spyOn(auth, "signIn").mockRejectedValue(new TypeError("Failed to fetch"));
+    renderWithAuth(<SignInForm onSuccess={vi.fn()} />, auth);
+
+    await fillAndSubmit("ada@example.com", "correct-horse");
+
+    expect(await screen.findByText("Something went wrong. Please try again.")).toBeInTheDocument();
+  });
 });

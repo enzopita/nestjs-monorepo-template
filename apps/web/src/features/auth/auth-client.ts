@@ -14,7 +14,7 @@ export interface AuthClient {
   signOut(): Promise<void>;
 }
 
-const fallbackError = "Something went wrong. Please try again.";
+export const fallbackError = "Something went wrong. Please try again.";
 
 type BetterAuthResponse = {
   data: { user: Session["user"] } | null;
