@@ -7,5 +7,7 @@ export default defineConfig({
     globals: true,
     root: "./",
     include: ["**/*.e2e-spec.ts"],
+    // The pg pool connects lazily, so e2e tests need a URL but no database.
+    env: { DATABASE_URL: "postgres://postgres:postgres@localhost:5432/api" },
   },
 });

@@ -11,6 +11,8 @@ async function bootstrap() {
     ObserveInstrument ? { instrument: ObserveInstrument } : {},
   );
 
+  app.enableShutdownHooks();
+
   const env = app.get(EnvService);
 
   if (env.get("SWAGGER_ENABLED")) {

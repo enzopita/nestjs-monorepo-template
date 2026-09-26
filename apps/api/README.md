@@ -31,6 +31,17 @@
 $ pnpm install
 ```
 
+## Database
+
+```bash
+# start PostgreSQL (from the repository root)
+$ docker compose up -d
+
+# generate and apply migrations from src/database/schema.ts
+$ nub run db:generate
+$ nub run db:migrate
+```
+
 ## Compile and run the project
 
 ```bash

@@ -37,6 +37,11 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 
 - Declare every environment variable in `apps/api/src/config/env.schema.ts`; read it through the global `EnvService` (`env.get("KEY")`). Do not inject `ConfigService` or read `process.env` directly.
 
+## Database
+
+- PostgreSQL via Drizzle (`@nestjs/drizzle`, `drizzle-orm` RC). Tables go in `apps/api/src/database/schema.ts`, relations in `relations.ts`; inject with `@InjectDrizzle() db: Database`.
+- Local database: `docker compose up -d`. Migrations: `nub run db:generate` and `nub run db:migrate` in `apps/api`.
+
 ## Validation
 
 - Use Standard Schema with Zod via the built-in `StandardSchemaValidationPipe` and `@Body({ schema })`. Do not use class-validator or nestjs-zod.
