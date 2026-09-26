@@ -23,3 +23,13 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 
 - Follow `.claude/skills/nestjs-architecture-principles`: start with a flat feature module (controller, service, DTOs); add layers, ports, or repositories only when real pressure justifies it.
 - References to NestJS skills that are not installed can be ignored. AGENTS.md wins over any skill.
+
+## Validation
+
+- Use Standard Schema with Zod via the built-in `StandardSchemaValidationPipe` and `@Body({ schema })`. Do not use class-validator or nestjs-zod.
+- OpenAPI comes from the same schemas via `@nestjs/swagger` (`standardSchema` on response decorators).
+
+## Documentation
+
+- Before using a library, framework, or CLI API, fetch current docs via the Context7 MCP (`.mcp.json`). Do not rely on memory for version-specific APIs.
+- If Context7 lacks the answer or you are still unsure, search the web (official docs, changelogs, release notes) before writing code.
