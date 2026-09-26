@@ -5,6 +5,7 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 ## Commands
 
 - `nub run lint`, `nub run format`, `nub run check-types`
+- `nub run test`, `nub run test:e2e`, `nub run test:cov`
 - Root dev dependency: `nub add -D -W <pkg>`
 - Agent skills: `nub dlx skills update -p` (tracked in `skills-lock.json`; review the diff before committing)
 

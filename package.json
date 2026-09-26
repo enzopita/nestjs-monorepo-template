@@ -11,6 +11,9 @@
     "lint": "turbo run lint",
     "format": "oxfmt",
     "check-types": "turbo run check-types",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:cov": "turbo run test:cov",
     "format:check": "oxfmt --check",
     "prepare": "lefthook install"
   },
