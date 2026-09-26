@@ -9,7 +9,9 @@ export async function createApp(controllers: Type[] = []): Promise<NestFastifyAp
     controllers,
   }).compile();
 
-  const app = moduleFixture.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
+  const app = moduleFixture.createNestApplication<NestFastifyApplication>(new FastifyAdapter(), {
+    bodyParser: false,
+  });
 
   await app.init();
   await app.getHttpAdapter().getInstance().ready();

@@ -1,10 +1,12 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import type { NestFastifyApplication } from "@nestjs/platform-fastify";
+import { AllowAnonymous } from "@thallesp/nestjs-better-auth";
 import { z } from "zod";
 import { createApp } from "./support/create-app.js";
 
 const echoSchema = z.object({ name: z.string().min(1) });
 
+@AllowAnonymous()
 @Controller("echo")
 class EchoController {
   @Post()

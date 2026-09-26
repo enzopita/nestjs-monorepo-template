@@ -5,6 +5,8 @@ export const envSchema = z.object({
   HOST: z.string().min(1).default("0.0.0.0"),
   PORT: z.coerce.number().int().min(1).max(65_535).default(3000),
   DATABASE_URL: z.url(),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_URL: z.url(),
   SWAGGER_ENABLED: z.stringbool().default(true),
   OBSERVE_APP_KEY: z.string().default(""),
   OBSERVE_APP_SECRET: z.string().default(""),

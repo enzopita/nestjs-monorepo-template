@@ -1,10 +1,13 @@
 import { Module, StandardSchemaValidationPipe } from "@nestjs/common";
 import { APP_PIPE } from "@nestjs/core";
-import { DrizzleModule } from "@nestjs/drizzle";
+import { DrizzleModule, getDrizzleToken } from "@nestjs/drizzle";
 import { createObserveModule } from "@nestjs/observe";
+import { AuthModule } from "@thallesp/nestjs-better-auth";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { createAuth } from "./auth/auth.js";
 import { EnvModule } from "./config/env.module.js";
 import { EnvService } from "./config/env.service.js";
+import type { Database } from "./database/database.js";
 import { relations } from "./database/relations.js";
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
@@ -26,6 +29,16 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
         drizzle,
         connection: env.get("DATABASE_URL"),
         relations,
+      }),
+    }),
+    AuthModule.forRootAsync({
+      inject: [getDrizzleToken(), EnvService],
+      useFactory: (db: Database, env: EnvService) => ({
+        auth: createAuth({
+          db,
+          secret: env.get("BETTER_AUTH_SECRET"),
+          baseURL: env.get("BETTER_AUTH_URL"),
+        }),
       }),
     }),
   ],
