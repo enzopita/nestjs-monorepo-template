@@ -4,14 +4,22 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./index.css";
+import { env } from "./env";
+import { createBetterAuthClient } from "./features/auth/auth-client";
+import { AuthClientProvider } from "./features/auth/auth-client-context";
+import { ThemeProvider } from "./features/theme/theme-provider";
 import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient();
 
+const auth = createBetterAuthClient(env.VITE_API_URL);
+
 const router = createRouter({
   routeTree,
-  context: { queryClient },
+  context: { queryClient, auth },
   defaultPreload: "intent",
+  // Loaders read from React Query, which owns caching.
+  defaultPreloadStaleTime: 0,
 });
 
 declare module "@tanstack/react-router" {
@@ -28,8 +36,12 @@ if (rootElement === null) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthClientProvider client={auth}>
+          <RouterProvider router={router} />
+        </AuthClientProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>,
 );
