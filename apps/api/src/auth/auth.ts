@@ -25,6 +25,8 @@ export function createAuth({ db, env }: AuthOptions) {
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins: env.BETTER_AUTH_TRUSTED_ORIGINS,
     emailAndPassword: { enabled: true },
+    // Warn-level logs are client mistakes (e.g. "Invalid password"), not server faults.
+    logger: { level: "error" },
     // Stored in Postgres so limits hold across instances.
     rateLimit: { enabled: isProduction, storage: "database" },
     advanced: {
