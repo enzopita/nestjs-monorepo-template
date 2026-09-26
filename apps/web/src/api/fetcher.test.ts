@@ -29,6 +29,15 @@ describe("createFetcher", () => {
     ]);
   });
 
+  it("does not double the slash when the API origin ends with one", async () => {
+    const { calls, fetchFn } = recordingFetch(Response.json({ status: "ok" }));
+    const request = createFetcher("https://api.x.com/", fetchFn);
+
+    await request("/health/live", { method: "GET", schema: statusSchema });
+
+    expect(calls.map(({ url }) => url)).toEqual(["https://api.x.com/health/live"]);
+  });
+
   it("returns the response parsed by the schema", async () => {
     const { fetchFn } = recordingFetch(Response.json({ status: "ok", extra: 1 }));
     const request = createFetcher("https://api.x.com", fetchFn);
