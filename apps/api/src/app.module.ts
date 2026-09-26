@@ -36,8 +36,12 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       useFactory: (db: Database, env: EnvService) => ({
         auth: createAuth({
           db,
-          secret: env.get("BETTER_AUTH_SECRET"),
-          baseURL: env.get("BETTER_AUTH_URL"),
+          env: {
+            NODE_ENV: env.get("NODE_ENV"),
+            BETTER_AUTH_SECRET: env.get("BETTER_AUTH_SECRET"),
+            BETTER_AUTH_URL: env.get("BETTER_AUTH_URL"),
+            BETTER_AUTH_TRUSTED_ORIGINS: env.get("BETTER_AUTH_TRUSTED_ORIGINS"),
+          },
         }),
       }),
     }),

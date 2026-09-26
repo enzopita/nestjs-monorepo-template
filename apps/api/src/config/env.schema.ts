@@ -7,6 +7,17 @@ export const envSchema = z.object({
   DATABASE_URL: z.url(),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.url(),
+  // Comma-separated origins (e.g. the web app) allowed to call the auth API.
+  BETTER_AUTH_TRUSTED_ORIGINS: z
+    .string()
+    .default("")
+    .transform((value) =>
+      value
+        .split(",")
+        .map((origin) => origin.trim())
+        .filter(Boolean),
+    )
+    .pipe(z.array(z.url())),
   SWAGGER_ENABLED: z.stringbool().default(true),
   OBSERVE_APP_KEY: z.string().default(""),
   OBSERVE_APP_SECRET: z.string().default(""),

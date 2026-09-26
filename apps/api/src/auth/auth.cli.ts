@@ -9,6 +9,5 @@ const env = envSchema.parse(process.env);
 
 export const auth = createAuth({
   db: drizzle(env.DATABASE_URL, { relations }),
-  secret: env.BETTER_AUTH_SECRET,
-  baseURL: env.BETTER_AUTH_URL,
+  env,
 });

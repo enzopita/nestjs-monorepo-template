@@ -5,3 +5,22 @@ describe("envSchema", () => {
     expect(envSchema.shape.PORT.safeParse("").success).toBe(false);
   });
 });
+
+describe("BETTER_AUTH_TRUSTED_ORIGINS", () => {
+  const origins = envSchema.shape.BETTER_AUTH_TRUSTED_ORIGINS;
+
+  it("splits a comma-separated list and trims spaces", () => {
+    expect(origins.parse("http://localhost:5173, https://app.example.com")).toEqual([
+      "http://localhost:5173",
+      "https://app.example.com",
+    ]);
+  });
+
+  it("defaults to no extra origins", () => {
+    expect(origins.parse(undefined)).toEqual([]);
+  });
+
+  it("rejects an entry that is not a URL", () => {
+    expect(origins.safeParse("http://localhost:5173,nope").success).toBe(false);
+  });
+});
