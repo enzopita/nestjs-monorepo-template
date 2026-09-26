@@ -25,7 +25,8 @@
     ".pi/**",
     ".roo/**",
     ".windsurf/**",
-    "tools/oxlint/anti-slop/**"
+    "tools/oxlint/anti-slop/**",
+    "**/routeTree.gen.ts"
   ],
   "rules": {
     "oxc/no-accumulating-spread": "error",
