@@ -7,7 +7,7 @@
   "author": "",
   "type": "module",
   "scripts": {
-    "auth:generate": "auth generate --config src/auth/auth.cli.ts --output src/database/auth-schema.ts --yes",
+    "auth:generate": "auth generate --config src/auth/auth.cli.ts --output src/auth/auth.schema.ts --yes",
     "build": "nest build",
     "check-types": "node node_modules/typescript7/bin/tsc --noEmit",
     "db:generate": "drizzle-kit generate",
