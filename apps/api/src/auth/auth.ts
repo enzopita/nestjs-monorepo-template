@@ -31,6 +31,9 @@ export function createAuth({ db, env }: AuthOptions) {
       // Better Auth skips the origin check under NODE_ENV=test; keep it on.
       disableOriginCheck: false,
       cookiePrefix: env.BETTER_AUTH_COOKIE_PREFIX,
+      // Client IP for rate limiting, set by Cloudflare at the edge.
+      // X-Forwarded-For is client-controlled.
+      ipAddress: { ipAddressHeaders: ["cf-connecting-ip"] },
       // Force Secure cookies even when TLS terminates at a proxy.
       useSecureCookies: isProduction,
     },

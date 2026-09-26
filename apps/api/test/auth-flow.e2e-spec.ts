@@ -33,6 +33,8 @@ describe("Auth flow (e2e)", () => {
     const signIn = await app.inject({
       method: "POST",
       url: "/api/auth/sign-in/email",
+      // Cloudflare sets this; a client-supplied X-Forwarded-For must be ignored.
+      headers: { "cf-connecting-ip": "203.0.113.7", "x-forwarded-for": "198.51.100.1" },
       payload: { email, password },
     });
 
@@ -48,7 +50,10 @@ describe("Auth flow (e2e)", () => {
     });
 
     expect(session.statusCode).toBe(200);
-    expect(session.json()).toMatchObject({ user: { email } });
+    expect(session.json()).toMatchObject({
+      user: { email },
+      session: { ipAddress: "203.0.113.7" },
+    });
   });
 
   it("rejects an untrusted origin", async () => {
