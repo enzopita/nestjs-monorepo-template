@@ -8,6 +8,7 @@ import { createAuth } from "./auth/auth.js";
 import { EnvModule } from "./config/env.module.js";
 import { EnvService } from "./config/env.service.js";
 import type { Database } from "./database/database.js";
+import { HealthModule } from "./health/health.module.js";
 import { relations } from "./database/relations.js";
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
@@ -46,6 +47,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
         }),
       }),
     }),
+    HealthModule,
   ],
   providers: [{ provide: APP_PIPE, useClass: StandardSchemaValidationPipe }],
 })
