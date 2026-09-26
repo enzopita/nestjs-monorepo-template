@@ -116,3 +116,14 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Configuration
+
+Environment variables are validated at boot by `src/config/env.schema.ts` (Zod); the app refuses to start on invalid values. See `.env.example`.
+
+| Variable          | Default       | Notes                                                     |
+| ----------------- | ------------- | --------------------------------------------------------- |
+| `NODE_ENV`        | `development` | `development`, `test`, or `production`                    |
+| `HOST`            | `0.0.0.0`     | Fastify listen address                                    |
+| `PORT`            | `3000`        | Integer 1–65535                                           |
+| `SWAGGER_ENABLED` | `true`        | Serves Swagger UI at `/docs` and the spec at `/docs-json` |
