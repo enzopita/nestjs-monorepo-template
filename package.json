@@ -21,6 +21,7 @@
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@oxlint/plugins": "1.85.0",
+    "@shadcn/lint": "^0.2.0",
     "lefthook": "^2.1.14",
     "oxfmt": "^0.70.0",
     "oxlint": "1.85.0",
