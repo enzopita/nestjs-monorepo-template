@@ -7,7 +7,8 @@ export const envSchema = z.object({
   DATABASE_URL: z.url(),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.url(),
-  // Comma-separated origins (e.g. the web app) allowed to call the auth API.
+  // Comma-separated origins (e.g. the web app) allowed to call the API with
+  // credentials; drives both Better Auth's origin check and CORS.
   BETTER_AUTH_TRUSTED_ORIGINS: z
     .string()
     .default("")

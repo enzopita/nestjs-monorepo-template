@@ -33,6 +33,11 @@ NestJS monorepo (Turborepo + nub). Node.js version is pinned in `mise.toml`.
 - Type-aware oxlint rules enforce this; fix the types, do not disable the rule.
 - `apps/api` builds with TypeScript 6 (`typescript` alias, required by the Nest CLI) and type-checks with TypeScript 7 (`typescript7`). Revisit when Nest supports TS 7.
 
+## Routing
+
+- The API and the web app run on separate origins (e.g. `api.x.com` and `app.x.com`); routes have no global prefix. Better Auth lives at `/api/auth`.
+- Credentialed CORS comes from `BETTER_AUTH_TRUSTED_ORIGINS`: `src/configure-app.ts` covers controllers, AuthModule covers `/api/auth`. Keep app-wide setup in `configure-app.ts` so `main.ts` and the e2e tests share it.
+
 ## Configuration
 
 - Declare every environment variable in `apps/api/src/config/env.schema.ts`; read it through the global `EnvService` (`env.get("KEY")`). Do not inject `ConfigService` or read `process.env` directly.

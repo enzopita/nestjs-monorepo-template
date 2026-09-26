@@ -11,6 +11,7 @@ export default defineConfig({
       DATABASE_URL: "postgres://postgres:postgres@localhost:5432/api",
       BETTER_AUTH_SECRET: "test-secret-with-at-least-32-characters",
       BETTER_AUTH_URL: "http://localhost:3000",
+      BETTER_AUTH_TRUSTED_ORIGINS: "http://localhost:5173",
     },
   },
 });
