@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: false
+  jobs:
+    - name: lint
+      glob: "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"
+      run: nubx oxlint --fix --max-warnings 0 {staged_files}
+      stage_fixed: true
+    - name: format
+      run: nubx oxfmt --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: nubx commitlint --edit {1}

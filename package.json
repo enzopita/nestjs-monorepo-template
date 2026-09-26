@@ -1,20 +1,28 @@
 {
   "name": "nestjs-monorepo-template",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "format": "oxfmt",
+    "check-types": "turbo run check-types",
+    "format:check": "oxfmt --check",
+    "prepare": "lefthook install"
   },
   "devDependencies": {
-    "prettier": "3.9.6",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@oxlint/plugins": "1.85.0",
+    "lefthook": "^2.1.14",
+    "oxfmt": "^0.70.0",
+    "oxlint": "1.85.0",
     "turbo": "^2.11.4",
     "typescript": "7.0.2"
-  },
-  "engines": {
-    "node": ">=24"
   },
   "devEngines": {
     "packageManager": {
@@ -22,8 +30,7 @@
       "version": "0.9.3"
     }
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "engines": {
+    "node": ">=24"
+  }
 }
