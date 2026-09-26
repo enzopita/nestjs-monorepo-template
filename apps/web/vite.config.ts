@@ -12,4 +12,9 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api": process.env["API_PROXY_TARGET"] ?? "http://localhost:3000",
+    },
+  },
 });
