@@ -56,6 +56,7 @@
         "objectLiteralTypeAssertions": "never"
       }
     ],
+    "typescript/no-deprecated": "error",
     "typescript/no-explicit-any": "error",
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
@@ -67,7 +68,12 @@
     "typescript/no-unsafe-member-access": "error",
     "typescript/no-unsafe-return": "error",
     "typescript/no-unsafe-type-assertion": "error",
-    "typescript/only-throw-error": "error",
+    "typescript/only-throw-error": [
+      "error",
+      {
+        "allow": [{ "from": "package", "package": "@tanstack/router-core", "name": "Redirect" }]
+      }
+    ],
     "typescript/restrict-template-expressions": "error",
     "typescript/switch-exhaustiveness-check": "error"
   },
