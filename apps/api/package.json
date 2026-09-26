@@ -25,7 +25,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@better-auth/drizzle-adapter": "^1.7.6",
+    "@better-auth/drizzle-adapter": "catalog:",
     "@fastify/static": "^10.1.4",
     "@nestjs/common": "^12.0.1",
     "@nestjs/config": "^12.0.1",
@@ -35,12 +35,12 @@
     "@nestjs/platform-fastify": "^12.1.0",
     "@nestjs/swagger": "^12.0.2",
     "@thallesp/nestjs-better-auth": "^2.8.0",
-    "better-auth": "^1.7.6",
+    "better-auth": "catalog:",
     "drizzle-orm": "1.0.0-rc.4",
     "pg": "^8.23.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "zod": "^4.6.5"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@nestjs/cli": "^12.0.0",
@@ -48,15 +48,15 @@
     "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^12.0.1",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^24.0.0",
+    "@types/node": "catalog:",
     "@types/pg": "^8.23.1",
-    "@vitest/coverage-v8": "^4.1.2",
-    "auth": "^1.7.6",
+    "@vitest/coverage-v8": "catalog:",
+    "auth": "catalog:",
     "drizzle-kit": "1.0.0-rc.4",
     "source-map-support": "^0.5.21",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript7": "npm:typescript@7.0.2",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.1.2"
+    "vitest": "catalog:"
   }
 }
